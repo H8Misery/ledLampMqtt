@@ -21,7 +21,7 @@ export const SwitchLamp = ({...props}) => {
 export const SendButton = ({children, ...props}) => {
     const {url, topic, value}=props;
     const publish = () => {
-        SendMessage({url, topic, value}); //предаем только нужные пропсы
+        SendMessage({url, topic, value}); //предаем только нужные пропсы [weqwerwqrqegsddogioasjgjisda]
     }
     return (
         <>
