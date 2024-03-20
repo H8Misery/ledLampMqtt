@@ -10,8 +10,7 @@ export default function SelectHost () {
     useEffect(() => {//вызывается после монтирования компонента и каждый раз после изменения массива зависимостей
         // const connection = createConnection(url, topic); //объявили кастомный метод и отдаем серв + топик, который наследовали из App.js
         // connection.connect(); //не оч понимаю почему мы не можем сразу вызвать createConnection.connect()
-        // connector.init(url, topic);
-        connector.init(url, topic)
+        connector.init(url, topic);
         connector.sniff();
         return () => { //это функция очистки которая вызывается перед следующим срабатыванием эффекта и последний раз после размонтирования компонента
 
