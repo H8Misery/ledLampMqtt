@@ -2,10 +2,10 @@ import { SendMessage } from "../ws/Publish"
 
 
 export const SwitchLamp = ({...props}) => {
-    const {url, topic, value, type, onChange}=props; //props 
+    const {value, type, onChange}=props; //props 
 
     const publish = () => {
-        SendMessage({url, topic, value});  //предаем только нужные пропсы
+        SendMessage({value});  //предаем только нужные пропсы
     }
     return (
     <>
@@ -19,9 +19,9 @@ export const SwitchLamp = ({...props}) => {
 }
 
 export const SendButton = ({children, ...props}) => {
-    const {url, topic, value}=props;
+    const {value}=props;
     const publish = () => {
-        SendMessage({url, topic, value}); //предаем только нужные пропсы [weqwerwqrqegsddogioasjgjisda]
+        SendMessage({value}); //предаем только нужные пропсы [weqwerwqrqegsddogioasjgjisda]
     }
     return (
         <>
@@ -37,10 +37,10 @@ export const SendButton = ({children, ...props}) => {
 }
 
 export const SelectButton = ({children, ...props}) => {
-    const {url, topic, value, onWheel}=props;
+    const {value, onWheel}=props;
 
     const publish = () => {
-        SendMessage({url, topic, value}); //предаем только нужные пропсы
+        SendMessage({value}); //предаем только нужные пропсы
     }
 
     return (

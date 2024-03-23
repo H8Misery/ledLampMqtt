@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
 // import { createConnection } from './ws/ConnectMqtt'; //old method
-import { SwitchLamp, SendButton, SelectButton } from './Components/Commands';
-import MyInput from './Components/MyInput'
 import { connector } from './ws/mqtt_socket'
 import { ServerUrl } from './const/api.const';
 
@@ -52,31 +50,6 @@ export default function SelectHost () {
                 <option value="glamp">Env</option>
                 <option value="LedLamp/LedLamp_...">Prod</option>
             </select>
-        <SwitchLamp
-            url={url}
-            topic={topic}
-            value={powerlamp ? 'P_ON' : 'P_OFF'}
-            onChange={() => setPowerLamp(!powerlamp)}
-            type="checkbox"
-            />{!powerlamp ? 'ON' : 'OFF'}
-        <MyInput
-            value={title}
-            onChange={e => setTitle(e.target.value)}
-            type="text"
-            placeholder="Введите команду"/>
-        <SendButton
-            url={url}
-            topic={topic}
-          // {...title==='' ? '' : 'disabled'}
-            value={title}>Send
-        </SendButton>
-        <SelectButton
-            url={url}
-            topic={topic}
-            onWheel={() => setCounter (counter+1)}
-            value={`EFF${counter}`}>{`Эффект №${counter}`}
-        </SelectButton>
-
     </div>
     )
 }
