@@ -70,6 +70,7 @@ import mqtt from 'mqtt';
         socket.on("message", function (topic, received) {
         console.log(`Received in mqtt_socket.connect \n MSG: ${received} \n TOPIC: ${topic}`);
         })
+        return this.socket.connected
     }
     _disconnect() {
         console.log('Disconnection')
