@@ -1,7 +1,6 @@
 import mqtt from 'mqtt';
 
-class MqttConnector {
-    
+class MqttConnector  {
     constructor(url, topic) {
         console.log(`constructor have props: '${url}/${topic}'`)
         this.url = url;
