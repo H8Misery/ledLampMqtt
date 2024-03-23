@@ -33,6 +33,7 @@ class MqttConnector {
         socket.on("message", function (topic, received) {
         console.log(`📨 Received in sniffer: \n MSG: ${received} \n URL: ${socket.options.href} \n TOPIC: ${topic}`);//socket.options.href т.к. внутри функции мы не можем обратиться к внещним идентификаторам по типу url/this.url...
         })
+        return this.socket.connected
     }
 
     _connect(){
