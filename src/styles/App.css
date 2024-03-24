@@ -1,44 +1,51 @@
 .App {
   text-align: left;
-  background: #282c34;
-
+  background: #2b001a;
+  color: azure;
+  min-height: 100vh;
 }
 
-
-
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.header {
+  background-color:#2b001a;
+  min-height: 15vh;
   display: flex;
   flex-direction: column;
   align-items: left;
   justify-content: left;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(61, 32, 32);
 }
 
-/* .App-logo {
-  height: 40vmin;
-  pointer-events: none;
-} */
-
-
-/* @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.switches {
+  background-color: #0a0016;
+  min-height: 1vh;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
+  font-size: calc(10px + 2vmin);
+  color: #2b001a;
 }
 
-.App-link {
-  color: #61dafb;
+.buttons {
+  background-color: #282c34;
+  min-height: 1vh;
+  min-width: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: rgb(0, 250, 129);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
+.inputs {
+  background-color: #282c34;
+  min-height: 1vh;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: rgb(0, 250, 129);
+}

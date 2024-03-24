@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 // import { createConnection } from './ws/ConnectMqtt'; //old method
 import { connector } from './ws/mqtt_socket'
-import { ServerUrl } from './const/api.const';
+// import { ServerUrl } from './const/api.const';
+import { server_list, topic_list } from './const/api.const';
 
 export default function SelectHost () {
     // const [serverUrl, setServerUrl] = useState('ws://localhost:9001/ws');
-    const [url, setServerUrl] = useState('mqtt://localhost:9001/mqtt');//хук для хоста
+    const [url, setServerUrl] = useState('mqtt://localhost:9001/mqtt');//хук для хоста (не могу убрать отсюда т.к. ломается логика хуков изнутри useEffect. Либо нужно избавляться от init в котором я обновляю параметры класса mqtt_socket.js)
     const [topic, setTopic] = useState('glamp');//хук для топика (куда подпишемся)
 
 
@@ -17,7 +18,7 @@ export default function SelectHost () {
         return () => { //это функция очистки которая вызывается перед следующим срабатыванием эффекта и последний раз после размонтирования компонента
 
             connector.disconnect();
-            console.log(connector.socket ? "ONLINE" : "OFFLINE");
+            // console.log(connector.socket ? "ONLINE" : "OFFLINE");//не информативно
 
             
         };
@@ -25,18 +26,15 @@ export default function SelectHost () {
 //Ниже мы рендерим форму при монтировании объекта в App.js для того, чтобы выбрать нужный хост и топик
 
     return (
-    <div>
+    <div className='header'>
         <label>
             Server URL:{' '} {connector.socket ? "ONLINE" : "OFFLINE"}
             <select 
             value={url}
             onChange={e => setServerUrl(e.target.value)}
-            >
-                <option value="mqtt://localhost:9001/mqtt">localhost</option>  {/*далее я хочу подтянуть значения откуда-нибудь ещё*/}
-                <option value="mqtt://localhost:1883/mqtt">localhost2</option>
-                
-                {ServerUrl.map((localhost) => 
-                <option value={localhost.localhost} key={localhost.localhost}>sss</option> 
+            > 
+                {server_list.map((s) => 
+                <option value={s.value}>{s.name}</option>//пока не выходит массив распарсить(
                 )}
             </select>
         </label>
@@ -46,8 +44,8 @@ export default function SelectHost () {
             value={topic}
             onChange={e => setTopic(e.target.value)}
             >
-                <option value="glamp">Env</option>
-                <option value="LedLamp/LedLamp_...">Prod</option>
+                {topic_list.map((t) => 
+                <option value={t.value}>{t.name}</option>)}
             </select>
     </div>
     )

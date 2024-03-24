@@ -1,9 +1,9 @@
 import React from "react";
 
-const MyInput = (props) => {
+const CommandInput = (props) => {
     return (
     <input  {...props}/>
     )
 }
 
-export default MyInput
+export default CommandInput

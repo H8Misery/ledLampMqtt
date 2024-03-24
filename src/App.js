@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import './styles/App.css';
-import { SwitchLamp, SendButton, SelectButton } from './Components/Commands';
-import MyInput from './Components/MyInput'
+// import { SwitchLamp, SendButton, SelectButton } from './Components/Commands';
+import SwitchLamp from './Components/SwitchLamp';
+import SendButton from './Components/SendButton';
+import SelectButton from './Components/SelectButton';
+import CommandInput from './Components/CommandInput';
 // import MyButton from './Components/MyButton';
 
 import MainControlBoard from './MainControlBoard'
@@ -22,44 +25,47 @@ export default function App() {
 
   return (
     <>
-      <div >
-
-
-
-        
-        <button onClick={() => setShow(!show)}>
-            {show ? 'Закрыть канал' : 'Открыть канал'}
+      <div className='App'>
+        <button
+            className='buttons'
+            onClick={() => setShow(!show)}>
+              {show ? 'Закрыть канал' : 'Открыть канал'}
         </button>
+
         {show && <hr />}
         {show && <MainControlBoard />}
           <SwitchLamp
               // url={url}
               // topic={topic}
+              className='switch'
               disabled='true'
               value={powerlamp ? 'P_ON' : 'P_OFF'}
               onChange={() => setPowerLamp(!powerlamp)}
               type='checkbox'
-              />{!powerlamp ? 'ON' : 'OFF'}
-          <MyInput
+              />{!powerlamp ? 'ON!' : 'OFF'}
+          <CommandInput
+              className='inputs'
               value={title}
               onChange={e => setTitle(e.target.value)}
               type="text"
               placeholder="Введите команду"/>
           <SendButton
+              className='buttons'
               // url={url}
               // topic={topic}
             // {...title==='' ? '' : 'disabled'}
               value={title}>Send
           </SendButton>
           <SelectButton
+              className='buttons'
               // url={url}
               // topic={topic}
               onWheel={() => setCounter (counter+1)}
               value={`EFF${counter}`}>{`Эффект №${counter}`}
           </SelectButton>
-          <div>
+
             <p>Сюда потом поместим всё что слушает MQTT брокер</p>
-          </div>
+
         </div>
     </>
   );
