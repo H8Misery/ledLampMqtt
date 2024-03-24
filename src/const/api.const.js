@@ -1,6 +1,6 @@
 export const server_list = [
-    {value: 'mqtt://localhost:9001/mqtt', name: 'localhost 1'}, 
-    {value: 'mqtt://localhost:1883/mqtt', name: 'localhost 2'}
+    {value: 'mqtt://localhost:9001/mqtt', name: 'localhost1'}, 
+    {value: 'mqtt://localhost:1883/mqtt', name: 'localhost2'}
 ];
 
 export const topic_list = [
@@ -12,4 +12,4 @@ console.log('server_list');
 console.log(server_list);
 console.log('topic_list');
 console.log(topic_list);
-console.log('for configure go to `glamp\src\const\api.const.js`');
+console.log('for configure go to `api.const.js`');
