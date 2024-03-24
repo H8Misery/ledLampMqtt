@@ -2,7 +2,6 @@ import mqtt from 'mqtt';
 
 class MqttConnector  {
     constructor(url, topic) {
-        console.log(`constructor have props: '${url}/${topic}'`)
         this.url = url;
         this.topic = topic
         this.socket = null //обнуляем сокет по умолчанию, чтобы не плодить коннекты к хосту

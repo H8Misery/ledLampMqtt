@@ -30,6 +30,7 @@ export default function SelectHost () {
         <label>
             Server URL:{' '} {connector.socket ? "ONLINE" : "OFFLINE"}
             <select 
+            className='buttons'
             value={url}
             onChange={e => setServerUrl(e.target.value)}
             > 

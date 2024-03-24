@@ -1,15 +1,20 @@
 export const server_list = [
-    {value: 'mqtt://localhost:9001/mqtt', name: 'localhost1'}, 
-    {value: 'mqtt://localhost:1883/mqtt', name: 'localhost2'}
+    {id: 1, value: 'mqtt://localhost:9001/mqtt', name: 'localhost1'}, 
+    {id: 2, value: 'mqtt://localhost:1883/mqtt', name: 'localhost2'}
 ];
 
 export const topic_list = [
-    {value: 'glamp', name:'env'},
-    {value: 'LedLamp/LedLamp_...', name:'prod'}
+    {id: 1, value: 'glamp', name:'env'},
+    {id: 2, value: 'LedLamp/LedLamp_...', name:'prod'}
 ]
 //потом делитну, чисто для понимания пока оставил
-console.log('server_list');
-console.log(server_list);
-console.log('topic_list');
-console.log(topic_list);
+server_list.map((item) => {
+    console.log(`${item.id} - ${item.value}`)
+})
+// console.log(urlConsoleLog);
+topic_list.map((item) => {
+    console.log(`${item.id} - ${item.value}`)
+})
+// console.log(topicConsoleLog);
+
 console.log('for configure go to `api.const.js`');
