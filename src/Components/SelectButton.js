@@ -8,7 +8,7 @@ const SelectButton = ({children, ...props}) => {
     }
 
     return (
-        <>
+    <>
         <div>
             <button 
             className='buttons'
@@ -16,10 +16,8 @@ const SelectButton = ({children, ...props}) => {
             type='button' onClick={publish}> 
                 {children}
             </button>
-        
         </div>
     </>
-
     );
 }
 
