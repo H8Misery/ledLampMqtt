@@ -26,14 +26,6 @@ export default function App() {
   return (
     <>
       <div className='App'>
-        <button
-            className='buttons'
-            onClick={() => setShow(!show)}>
-              {show ? 'Закрыть канал' : 'Открыть канал'}
-        </button>
-
-        {show && <hr />}
-        {show && <MainControlBoard />}
           <SwitchLamp
               // url={url}
               // topic={topic}
@@ -63,8 +55,13 @@ export default function App() {
               onWheel={() => setCounter (counter+1)}
               value={`EFF${counter}`}>{`Эффект №${counter}`}
           </SelectButton>
-
-            <p>Сюда потом поместим всё что слушает MQTT брокер</p>
+          <button
+            className='buttons'
+            onClick={() => setShow(!show)}>
+              {show ? 'Закрыть чат' : 'Открыть чат'}
+        </button>
+        {show && <hr />}
+        {show && <MainControlBoard />}
 
         </div>
     </>

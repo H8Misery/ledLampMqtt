@@ -31,7 +31,7 @@ class MqttConnector  {
         socket.on("message", function (topic, received) {
         console.log(`📨 Received in sniffer: \n MSG: ${received} \n URL: ${socket.options.href} \n TOPIC: ${topic}`);//socket.options.href т.к. внутри функции мы не можем обратиться к внещним идентификаторам по типу url/this.url...
         })
-        return this.socket.connected
+        return this.socket//возвращаем сокет т.к. потом заходим к нему "принюхаться" в контролборде
     }
 
     _connect(){
@@ -58,12 +58,17 @@ class MqttConnector  {
     disconnect() {
         // const socket = this._connect();
         console.log(`${!this.socket ? 'Session is null' : 'Session now stable'} ⛔ Disconnection...`) //Пишем что вызван метод дисконнекта, проверяем сессию
-        const socket = this._connect();
-        socket.end();
-        this.socket.on("close", (err) => {
-            err ? console.log(err) : console.log('Closing connection ')
-            });
-        this.socket = null //обнуляем сокет т.к. выходим из сессии
+        if (!this.socket) {
+            console.log('Already Disconnected. No need to disconnect')
+        } else {
+            const socket = this._connect();
+            socket.end();
+            this.socket.on("close", (err) => {
+                err ? console.log(err) : console.log('Closing connection ')
+                });
+            this.socket = null //обнуляем сокет т.к. выходим из сессии
+        }
+
 
     }
 
