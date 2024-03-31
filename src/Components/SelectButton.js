@@ -1,3 +1,4 @@
+import { Button } from "antd";
 import { SendMessage } from "../ws/Publish"
 
 const SelectButton = ({children, ...props}) => {
@@ -9,14 +10,11 @@ const SelectButton = ({children, ...props}) => {
 
     return (
     <>
-        <div>
-            <button 
-            className='buttons'
-            onWheel={onWheel}
-            type='button' onClick={publish}> 
-                {children}
-            </button>
-        </div>
+    <Button 
+        onWheel={onWheel}
+        onClick={publish}> 
+        {children}
+    </Button>
     </>
     );
 }

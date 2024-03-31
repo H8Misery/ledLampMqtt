@@ -1,8 +1,9 @@
+import { Input } from "antd";
 import React from "react";
 
 const CommandInput = (props) => {
     return (
-    <input  {...props}/>
+    <Input  {...props}/>
     )
 }
 

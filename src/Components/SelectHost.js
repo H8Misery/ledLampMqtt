@@ -1,4 +1,4 @@
-import { server_list } from '../const/api.const';
+import { host_list } from '../const/api.const';
 
 const SelectHost = ({...props}) => {
     const {value, onChange} = props
@@ -8,7 +8,7 @@ const SelectHost = ({...props}) => {
                 onChange={onChange}
                 value={value}
             > 
-                {server_list.map((host) => 
+                {host_list.map((host) => 
                 <option key={host.id} value={host.value}>{host.name}</option>)}
             </select>
         </>

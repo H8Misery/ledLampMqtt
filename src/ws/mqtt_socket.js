@@ -4,12 +4,12 @@ class MqttConnector  {
     constructor(url, topic) {
         this.url = url;
         this.topic = topic
-        this.socket = null //обнуляем сокет по умолчанию, чтобы не плодить коннекты к хосту
+        this.socket = null //объявляем сокет и задаем ему Null по дефолту
         this.options = {
             // Clean session
             clean: true,
             connectTimeout: 3000,
-            // reconnectPeriod: 611,
+            reconnectPeriod: 10000,
             // Authentication
             // clientId: 'emqx_test',
             // username: 'emqx_test',
@@ -20,21 +20,24 @@ class MqttConnector  {
     init(newUrl, newTopic) {
         this.url=newUrl;
         this.topic=newTopic;
-        this.socket = null //обнуляем сокет при изменении, чтобы не плодить коннекты к хосту
+        // this.socket = null //обнуляем сокет при изменении, чтобы не плодить коннекты к хосту
         console.log(`init changed params: '${this.url}' / '${this.topic}'`)
+        // if (!this.socket) this.sniff();
     }
 
     sniff() {//тестово сразу вызываю после подписки ^
         // this.subscribe();
-        console.log(`🔎 Sniffing starting...`)
+        console.log(`🔎 Sniffing`)
         const socket = this._connect();
         socket.on("message", function (topic, received) {
         console.log(`📨 Received in sniffer: \n MSG: ${received} \n URL: ${socket.options.href} \n TOPIC: ${topic}`);//socket.options.href т.к. внутри функции мы не можем обратиться к внещним идентификаторам по типу url/this.url...
         })
-        return this.socket//возвращаем сокет т.к. потом заходим к нему "принюхаться" в контролборде
+
+        return this.socket//возвращаем сокет т.к. потом заходим к нему "принюхаться" в MessageSnifferUi
     }
 
     _connect(){
+        
         if(!this.socket) { 
             
             console.log(`${!this.socket ? 'Session is null' : 'Session stable'}. Connecting ${this.url}...`);
@@ -52,12 +55,14 @@ class MqttConnector  {
                 console.log(`RECONNECTING ... ... ...\n${!this.socket ? 'Session is null' : 'Session stable'}`);
             });
             // this.socket.end();//потом, возможно, придумаю как вызывать сокет энд, и окончательно избавиться от disconnect(); который вызываю при очистке в useEffect, в MainControlBoard
-        }  return this.socket
+        }  
+        else console.log('Atteption to connect. Already connected, no need to connect') 
+        return this.socket
     }
 
     disconnect() {
         // const socket = this._connect();
-        console.log(`${!this.socket ? 'Session is null' : 'Session now stable'} ⛔ Disconnection...`) //Пишем что вызван метод дисконнекта, проверяем сессию
+        // console.log(`${!this.socket ? 'Session is null' : 'Session now stable'} ⛔ Disconnection...`) //Пишем что вызван метод дисконнекта, проверяем сессию
         if (!this.socket) {
             console.log('Already Disconnected. No need to disconnect')
         } else {
