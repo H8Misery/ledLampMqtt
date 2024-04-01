@@ -1,82 +1,69 @@
-import { useState } from 'react';
-// import './styles/App.css';
+import React from 'react';
+import { Layout, theme } from 'antd';
 import SwitchLamp from './Components/SwitchLamp';
-import SendButton from './Components/SendButton';
-import SelectButton from './Components/SelectButton';
-import CommandInput from './Components/CommandInput';
-import MainControlBoard from './Components/MainControlBoard';
-import MessageSnifferUi from './Components/MessageSnifferUi';
-import { Row, Col, Button } from 'antd';
-// import { eff_list } from './const/eff.const';
+import { Routes, Route } from 'react-router-dom';
+import BasicCmdBoard from './pages/BasicCmdBoard';
+import EffectCmdButtons from './pages/EffectCmdButtons';
+import MainControlBoard from './pages/MainControlBoard';
+import MainMenu from './Components/MainMenu';
+import SliderController from './Components/SliderController';
 
+const { Header, Content, Footer } = Layout;
 
-// import Publish from './ws/Publish';
-
-
-
-// import PublishMessage from './Components/MyButton';
-
-export default function App() {
-
-  const [show_settings, setShow_settings] = useState(false);
-  const [show_sniffer, setShow_sniffer] = useState(false);
-  const [title, setTitle] = useState(''); //хук для инпута и отправки кастомного сообщения
-  const [counter, setCounter] = useState(0); if (counter>50) {setCounter(0)};//меняем
-
+const App = () => {
+  const {
+    token: { colorBgContainer, borderRadiusLG },
+  } = theme.useToken();
   return (
-    <>
+    <Layout> 
+      <MainMenu/>
+      <Header
+        style={{
+          position: 'sticky',
+          top: 0,
+          zIndex: 1,
+          width: '100%',
+          display: 'flex',
+          alignItems: 'normal',
+        }}
 
-      <Row gutter={[24, 16]}>
-      <Col span={6}>
-        <SwitchLamp/>
-      </Col>
-      <Col span={6}>  
-      <Button
-            className='buttons'
-            onClick={() => setShow_sniffer(!show_sniffer)}>
-            {show_sniffer ? 'Закрыть сообщения' : 'Открыть сообщения'}
-            {show_sniffer && <MessageSnifferUi/>}
-        </Button>
-      </Col>
-      <Col span={12}>
-        <CommandInput
-            value={title}
-            onChange={e => setTitle(e.target.value)}
-            type="text"
-            placeholder="Введите команду"
-        />
-      </Col>
-        <Col span={12}>
+      >       
 
-      </Col>
-      <Col span={12}>
-        <SendButton
-          type='primary'
-          size="default"
-          shape="default"
-          ghost='false'
-          value={title}>Отправить команду
-        </SendButton>
-      </Col>
-      </Row>
-      <Row gutter={[24, 16]}>
-      <Col span={12}>
+      <SwitchLamp/> {/*Вынес вкл/выкл лампы на самый верх, для удобства*/}
 
-        <Button
-          className='buttons'
-          onClick={() => setShow_settings(!show_settings)}>
-          {show_settings ? 'Закрыть настройки' : 'Открыть настройки'}
-        </Button>
-      </Col>
-      <Col span={12}>
-        <SelectButton
-          onWheel={() => setCounter (counter+1)}
-          value={`EFF${counter}`}>{`Эффект №${counter}`}
-        </SelectButton>
-      </Col>
-      </Row>
-          {show_settings && <hr />}
-          {show_settings && <MainControlBoard />}
-    </>
+      </Header>
+      <Content
+        style={{
+          padding: '0 48px',
+        
+        }}
+      >
+        <div
+          style={{
+            padding: 24,
+            minHeight: 380,
+            background: colorBgContainer,
+            borderRadius: borderRadiusLG,
+          }}
+        >
+              <SliderController prefix='LIGHT'/>
+              <SliderController prefix='SPEED'/>
+              <SliderController prefix='SPAN'/>
+            <Routes>
+              <Route path="*" element={<BasicCmdBoard />} />
+              <Route path="effects" element={<EffectCmdButtons />} />
+              <Route path="control-board" element={<MainControlBoard />} />
+            </Routes>
+        </div>
+      </Content>
+      <Footer
+        style={{
+          textAlign: 'center',
+        }}
+      >
+        Bomzh Dezign ©{new Date().getFullYear()} Created by Ant UED
+      </Footer>
+    </Layout>
   );
-}
+};
+export default App;

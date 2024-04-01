@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { connector } from '../ws/mqtt_socket'
-import SelectHost from './SelectHost';
-import SelectTopic from './SelectTopic';
+import SelectHost from '../Components/SelectHost';
+import SelectTopic from '../Components/SelectTopic';
 
 export default function MainControlBoard () {
     // const [serverUrl, setServerUrl] = useState('ws://localhost:9001/ws');
