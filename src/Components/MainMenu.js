@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 import { Link } from 'react-router-dom';
+
 const items = [
   {
     label: <Link to='basic'>Basic Board</Link>,
     key: 'basic',
-    icon: <MailOutlined />,
+    // icon: <MailOutlined />,
   },
   {
     label: <Link to='effects'>Effects Board</Link>,
     key: 'effects',
-    icon: <AppstoreOutlined />,
+    // icon: <AppstoreOutlined />,
     // disabled: true,
   },
   {
     label: <Link to='control-board'>Control Board</Link>,
     key: 'SubMenu',
-    icon: <SettingOutlined />,
+    // icon: <SettingOutlined />,
     children: [
       {
         type: 'group',
@@ -50,12 +50,23 @@ const items = [
     ],
   },
 ];
-const MainMenu = () => {
-  const [current, setCurrent] = useState('mail');
+const MainMenu = (props) => {
+  const {theme} = props
+  const [current, setCurrent] = useState('SubMenu');
   const onClick = (e) => {
     console.log('click ', e);
     setCurrent(e.key);
   };
-  return <Menu onClick={onClick} selectedKeys={[current]} mode="horizontal" items={items} />;
+  return <Menu 
+          style={
+              { 
+              flex: "auto"
+              }
+          } 
+          onClick={onClick} 
+          selectedKeys={[current]} 
+          mode="horizontal" 
+          theme={theme} 
+          items={items}/>;
 };
 export default MainMenu;

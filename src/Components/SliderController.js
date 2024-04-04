@@ -16,9 +16,16 @@ export default function SliderController ({...props}) {
     };
 
     return (
-            <>
-              <Slider min={0} max={255} defaultValue={30} onChange={onChange} onChangeComplete={onChangeComplete} />
-            </>
+        <>
+            <Slider 
+                min={0} 
+                step={5} 
+                max={255} 
+                defaultValue={30} 
+                onChange={onChange} 
+                onChangeComplete={onChangeComplete} 
+            />
+        </>
     )
 
 }
