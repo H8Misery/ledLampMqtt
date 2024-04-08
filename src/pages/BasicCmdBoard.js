@@ -26,10 +26,7 @@ export default function BasicCmdBoard() {
     <>
 
       <Row gutter={[24, 16]}>
-      <Col span={6}>
-       
-      </Col>
-      <Col span={6}>  
+      <Col span={12}>  
       <Button
             className='buttons'
             onClick={() => setShow_sniffer(!show_sniffer)}>

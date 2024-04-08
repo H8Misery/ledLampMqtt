@@ -4,8 +4,9 @@ export const host_list = [
 ];
 
 export const topic_list = [
-    {id: 1, value: 'glamp', name:'env'},
-    {id: 2, value: 'LedLamp/LedLamp_...', name:'prod'}
+    {id: 1, value: 'glamp_sub', name:'subscribe 1'},
+    {id: 4, value: 'glamp_pub', name:'publish 1'},
+
 ]
 //для понимания что у нас тут хранится вывожу в консольку:
 console.log('Constants for mqtt broker that we use now in select:');

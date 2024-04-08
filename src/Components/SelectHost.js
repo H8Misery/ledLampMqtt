@@ -3,7 +3,7 @@ import { host_list } from '../const/api.const';
 const SelectHost = ({...props}) => {
     const {value, onChange} = props
     return (
-        <>
+        <><p>Host</p>
             <select
                 onChange={onChange}
                 value={value}

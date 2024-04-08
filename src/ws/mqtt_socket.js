@@ -1,9 +1,10 @@
 import mqtt from 'mqtt';
 
 class MqttConnector  {
-    constructor(url, topic) {
+    constructor(url, sub_topic, pub_topic) {
         this.url = url;
-        this.topic = topic
+        this.sub_topic = sub_topic
+        this.pub_topic = pub_topic
         this.socket = null //объявляем сокет и задаем ему Null по дефолту
         this.options = {
             // Clean session
@@ -17,11 +18,12 @@ class MqttConnector  {
           }
     }
 
-    init(newUrl, newTopic) {
+    init(newUrl, newSubTopic, newPubTopic) {
         this.url=newUrl;
-        this.topic=newTopic;
+        this.sub_topic = newSubTopic
+        this.pub_topic = newPubTopic
         // this.socket = null //обнуляем сокет при изменении, чтобы не плодить коннекты к хосту
-        console.log(`init changed params: '${this.url}' / '${this.topic}'`)
+        console.log(`init changed params: '${this.url}' / 'sub topic: ${this.sub_topic}' and for pub: ${this.pub_topic}`);
         // if (!this.socket) this.sniff();
     }
 
@@ -47,9 +49,9 @@ class MqttConnector  {
             });
             this.socket.on("connect", () => {
                 console.log(`✅ Connected to ${this.url}`);
-            this.socket.subscribe(this.topic, { qos: 0 }, (err) => {
-                err ? console.log(err) : console.log(`✅ Subscribed to ${this.topic}`)
-                });
+                this.socket.subscribe(this.sub_topic, { qos: 0 }, (err) => {
+                    err ? console.log(err) : console.log(`✅ Subscribed to ${this.sub_topic}`)
+                    });
             })
             this.socket.on("reconnect", () => {
                 console.log(`RECONNECTING ... ... ...\n${!this.socket ? 'Session is null' : 'Session stable'}`);
@@ -81,12 +83,12 @@ class MqttConnector  {
         const socket = this._connect();
 
         console.log(`🖆 Trying to publish: ${message} 
-        to topic: ${this.topic} on URL: ${this.socket.options.href}. 
+        to pub_topic: ${this.pub_topic} on URL: ${this.socket.options.href}. 
         ${!this.socket ? 'Session is null' : 'Session stable'}`) //очередная проверка
 
-        socket.publish(this.topic, message, { qos: 0, retain: false }, function (err) {
+        socket.publish(this.pub_topic, message, { qos: 0, retain: false }, function (err) {
             err ? console.log(err) : console.log('🖅 Success!')
         });
     }
 }
-export const connector = new MqttConnector('mqtt://localhost:9001/mqtt', 'glamp');
+export const connector = new MqttConnector('mqtt://localhost:9001/mqtt', 'glamp', 'pub_glamp');
